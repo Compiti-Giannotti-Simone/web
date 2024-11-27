@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+.galaxy-bg {
+    background-image: url("https://images.pexels.com/photos/2387877/pexels-photo-2387877.jpeg?cs=srgb&dl=pexels-samkolder-2387877.jpg&fm=jpg");
+    height: 100vh;
+}
+
+.quicksand-400 {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+h2 {
+    font-size: 3rem;
+}
+
+input {
+    outline: none;
+}
+
+.error {
+    background-color: rgb(231, 77, 77);
+}
+
+.success {
+    background-color: rgb(44, 161, 44);
+}
+
+.signup-bg {
+    background-color: rgba(182, 182, 182, 0.336)
+}
+
+.signup {
+    background-color: gray;
+}

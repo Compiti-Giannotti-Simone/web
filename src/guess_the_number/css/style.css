@@ -1,0 +1,11 @@
+body {
+    background-image: linear-gradient(to right, rgb(212, 207, 255), rgb(17, 0, 255));
+}
+
+.lose {
+    background-color: rgb(204, 37, 37) !important;
+}
+
+.win {
+    background-color: rgb(50, 201, 50) !important;
+}
