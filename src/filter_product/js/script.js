@@ -1,6 +1,6 @@
 const products = [
     {
-        productName: "OXFORD SHIRT TOMMY HILFIGER",
+        name: "OXFORD SHIRT TOMMY HILFIGER",
         category: "Shirts",
         price: "30",
         image: "oxford.webp",
@@ -8,7 +8,7 @@ const products = [
         sale: true,
     },
     {
-        productName: "GANT GINGHAM SHIRT",
+        name: "GANT GINGHAM SHIRT",
         category: "Shirts",
         price: "49",
         image: "gant.webp",
@@ -16,7 +16,7 @@ const products = [
         sale: false,
     },
     {
-        productName: "LUMBERJACK SHIRT",
+        name: "LUMBERJACK SHIRT",
         category: "Shirts",
         price: "49",
         image: "lumberjackshirt.webp",
@@ -24,7 +24,7 @@ const products = [
         sale: false,
     },
     {
-        productName: "BOSS SLIM FIT JEANS",
+        name: "BOSS SLIM FIT JEANS",
         category: "Jeans",
         price: "99",
         image: "boss.webp",
@@ -32,7 +32,7 @@ const products = [
         sale: false,
     },
     {
-        productName: "ARMANI POCKETS PANT",
+        name: "ARMANI POCKETS PANT",
         category: "Jeans",
         price: "129",
         image: "armani.webp",
@@ -40,7 +40,7 @@ const products = [
         sale: false,
     },
     {
-        productName: "RALPH LAUREN AERA LACE",
+        name: "RALPH LAUREN AERA LACE",
         category: "Shoes",
         price: "129",
         image: "polo.webp",
@@ -48,7 +48,7 @@ const products = [
         sale: true,
     },
     {
-        productName: "RALPH LAUREN HERITAGE",
+        name: "RALPH LAUREN HERITAGE",
         category: "Shoes",
         price: "110",
         image: "polo2.webp",
@@ -56,7 +56,7 @@ const products = [
         sale: false,
     },
     {
-        productName: "CLOSURE JACKET LONDON",
+        name: "CLOSURE JACKET LONDON",
         category: "Jackets",
         price: "189",
         image: "london.webp",
@@ -64,7 +64,7 @@ const products = [
         sale: false,
     },
     {
-        productName: "JACK JONES LONG PUFFER",
+        name: "JACK JONES LONG PUFFER",
         category: "Jackets",
         price: "77",
         image: "jack.webp",
@@ -72,7 +72,7 @@ const products = [
         sale: false,
     },
     {
-        productName: "POLO RALPH LAUREN ROUND",
+        name: "POLO RALPH LAUREN ROUND",
         category: "Sunglasses",
         price: "111",
         image: "sunRalph.webp",
@@ -82,6 +82,9 @@ const products = [
 ];
 
 document.querySelector('#search-button').addEventListener('click',search)
+document.querySelector('#search-form').addEventListener('click',function(event) {
+    event.preventDefault()
+})
 
 const navLinks = document.querySelectorAll('a:not(.dropdown-toggle)')
 navLinks.forEach(element => {
@@ -91,25 +94,28 @@ navLinks.forEach(element => {
 });
 
 products.forEach(element => {
-    createProduct(element.productName,element.category,element.price,element.image,element.size,element.sale)
+    createProduct(element)
 });
 
-function createProduct(name, category, price, img, sizes, sale) {
+function createProduct(element) {
     const row = document.querySelector('.row')
     const product = document.createElement('div')
-    product.classList.add('text-center', 'p-2', 'col-12', 'col-md-6', 'col-lg-4', category)
+    product.classList.add('product', 'text-center', 'p-2', 'col-12', 'col-md-6', 'col-lg-4', element.category)
     let product_img = document.createElement('img')
-    product_img.src = './images/'+img
+    product_img.src = './images/'+element.image
     product_img.style.width = '100%'
     product_img.style.height = 'auto'
     let product_name = document.createElement('h1')
-    product_name.innerHTML = name
+    product_name.innerHTML = element.name
     let product_sizes = document.createElement('p')
-    product_sizes.innerHTML = sizes.join(',')
+    product_sizes.innerHTML = element.size.join(',')
+    let product_price = document.createElement('p')
+    product_price.innerHTML = element.price + "€"
     product.appendChild(product_img)
     product.appendChild(product_name)
     product.appendChild(product_sizes)
-    if(sale) {
+    product.appendChild(product_price)
+    if(element.sale) {
         let sale = document.createElement('p')
         sale.innerHTML = "On Sale"
         product.classList.add('border', 'border-2', 'border-danger')
@@ -119,7 +125,7 @@ function createProduct(name, category, price, img, sizes, sale) {
 }
 
 function filter(category) {
-    const products = document.querySelectorAll('.col-12')
+    const products = document.querySelectorAll('.product')
     products.forEach(element => {
         element.classList.remove('d-none')
     });
@@ -132,8 +138,7 @@ function filter(category) {
 
 function search() {
     const search = document.querySelector('#search-field').value
-    console.log(search)
-    const products = document.querySelectorAll('.col-12')
+    const products = document.querySelectorAll('.product')
     products.forEach(element => {
         element.classList.remove('d-none')
         if(!element.querySelector('h1').innerHTML.toLowerCase().includes(search.toLowerCase())) {
